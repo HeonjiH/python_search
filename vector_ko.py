@@ -12,7 +12,7 @@ model = ElectraModel.from_pretrained(model_name)
 
 #텍스트를 벡터로 변환하는 함수
 def embed_text(text):
-    inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True, max_length=128)
+    inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True, max_length=256)
     outputs = model(**inputs)
     return outputs.last_hidden_state[:,0,:].detach().numpy()
 
@@ -39,7 +39,7 @@ index = faiss.IndexFlatL2(dimension)
 index.add(document_embeddings.astype('float32'))
 
 # 검색할 쿼리
-query = "코로나-19 증상"
+query = "코로나-19 증상이 뭐임?"
 query_embedding = embed_text(query)[0].astype('float32')
 
 print("Query embedding shape:", query_embedding.shape)

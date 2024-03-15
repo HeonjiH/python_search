@@ -1,5 +1,4 @@
 from transformers import ElectraTokenizer, ElectraModel
-import torch
 import faiss
 import numpy as np
 import os
